@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Booster</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#14001f,#1b0033,#220044);
+color:#fff;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+background:#1a0033;
+border-bottom:1px solid rgba(255,255,255,0.05);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:18px;
+font-weight:600;
+color:#c084fc;
+}
+
+.burger{
+font-size:20px;
+cursor:pointer;
+color:#c084fc;
+}
+
+/* SIDE MENU */
+.side-menu{
+position:fixed;
+top:0;
+left:-280px;
+width:260px;
+height:100%;
+background:#1a0033;
+padding:25px;
+transition:0.4s;
+box-shadow:5px 0 30px rgba(0,0,0,0.6);
+z-index:999;
+text-align:center;
+}
+
+.side-menu.active{
+left:0;
+}
+
+.side-menu h3{
+margin-bottom:20px;
+font-size:18px;
+font-weight:600;
+background:linear-gradient(90deg,#c084fc,#a855f7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.side-menu button,
+.side-menu a{
+display:block;
+width:100%;
+margin-bottom:15px;
+padding:12px;
+background:#250044;
+border-radius:8px;
+color:#c084fc;
+text-decoration:none;
+cursor:pointer;
+transition:0.3s;
+font-size:14px;
+border:none;
+}
+
+.side-menu button:hover,
+.side-menu a:hover{
+background:#c084fc;
+color:#000;
+}
+
+.close-btn{
+position:absolute;
+top:15px;
+right:15px;
+background:none;
+border:none;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:500;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* FEATURES */
+.features-box{
+display:none;
+margin-top:15px;
+}
+
+.features-box li{
+margin-bottom:10px;
+padding:10px;
+background:#2d0055;
+border-radius:8px;
+font-size:13px;
+}
+
+/* MAIN */
+.container{
+max-width:500px;
+margin:60px auto;
+padding:30px;
+background:#220044;
+border-radius:15px;
+box-shadow:0 0 40px rgba(192,132,252,0.2);
+text-align:center;
+}
+
+.container h2{
+margin-bottom:20px;
+color:#c084fc;
+}
+
+.input-group{
+margin-bottom:18px;
+text-align:left;
+}
+
+.input-group label{
+font-size:13px;
+color:#bbb;
+display:block;
+margin-bottom:6px;
+}
+
+.input-group input{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.1);
+background:#2d0055;
+color:#fff;
+outline:none;
+transition:0.3s;
+}
+
+.input-group input:focus{
+border-color:#c084fc;
+}
+
+/* FULL WIDTH SHARE BUTTON (LIKE BEFORE) */
+.btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#c084fc;
+color:#000;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#a855f7;
+}
+
+/* RESPONSE */
+.response{
+margin-top:25px;
+padding:20px;
+border-radius:12px;
+background:#2d0055;
+display:none;
+animation:fade 0.4s ease;
+text-align:left;
+}
+
+.response.success{
+border-left:5px solid #00ff99;
+}
+
+.response.error{
+border-left:5px solid #ff4d6d;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+<div class="logo"><i class="fas fa-share-nodes"></i> SHARE BOOST</div>
+<div class="burger" onclick="openMenu()">
+<i class="fas fa-bars"></i>
+</div>
+</div>
+
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<div id="menu" class="side-menu">
+<button class="close-btn" onclick="closeMenu()">
+<i class="fas fa-arrow-left"></i>
+</button>
+
+<h3>Features & Developer</h3>
+
+<button onclick="toggleFeatures()">
+<i class="fas fa-star"></i> Features
+</button>
+
+<a href="https://www.facebook.com/notfound500" target="_blank">
+<i class="fas fa-code"></i> Developer
+</a>
+
+<div id="featuresBox" class="features-box">
+<ul>
+<li><i class="fas fa-bolt"></i> Fast Sharing</li>
+<li><i class="fas fa-shield-halved"></i> Secure API Handling</li>
+<li><i class="fas fa-mobile-screen"></i> Fully Responsive Website</li>
+<li><i class="fas fa-chart-line"></i> Handle errors well</li>
+<li><i class="fas fa-server"></i> Cloned by Vern REST API</li>
+</ul>
+</div>
+
+</div>
+
+<div class="container">
+<h2><i class="fas fa-paper-plane"></i> SIMPLE SHARE BOOSTER</h2>
+
+<div class="input-group">
+<label><i class="fas fa-key"></i> API Key</label>
+<input type="text" id="key" placeholder="Enter API key">
+</div>
+
+<div class="input-group">
+<label><i class="fas fa-cookie-bite"></i> Facebook Cookie</label>
+<input type="text" id="cookie" placeholder="Enter Facebook cookie">
+</div>
+
+<div class="input-group">
+<label><i class="fas fa-link"></i> Post Link</label>
+<input type="text" id="link" placeholder="Enter post link">
+</div>
+
+<div class="input-group">
+<label><i class="fas fa-hashtag"></i> Share Limit</label>
+<input type="number" id="limit" placeholder="Enter share limit">
+</div>
+
+<button class="btn" onclick="sendRequest()">
+<i class="fas fa-rocket"></i> Start Sharing
+</button>
+
+<div id="response" class="response"></div>
+</div>
+
+<script>
+function openMenu(){
+document.getElementById("menu").classList.add("active");
+document.getElementById("overlay").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("menu").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
+}
+
+function toggleFeatures(){
+let box=document.getElementById("featuresBox");
+box.style.display=box.style.display==="block"?"none":"block";
+}
+
+async function sendRequest(){
+let key=document.getElementById("key").value;
+let cookie=document.getElementById("cookie").value;
+let link=document.getElementById("link").value;
+let limit=document.getElementById("limit").value;
+
+let responseBox=document.getElementById("response");
+responseBox.style.display="block";
+responseBox.className="response";
+responseBox.innerHTML="<h4><i class='fas fa-spinner fa-spin'></i> Processing...</h4>";
+
+try{
+let res=await fetch(`https://vern-rest-api.vercel.app/api/share?key=${key}&cookie=${cookie}&link=${link}&limit=${limit}`);
+let data=await res.json();
+
+if(data.status){
+responseBox.classList.add("success");
+responseBox.innerHTML=`
+<h4><i class="fas fa-circle-check"></i> Share Completed Successfully!</h4>
+<p><strong>Message:</strong> ${data.message || "Shares delivered successfully."}</p>
+<p><strong>Requested:</strong> ${limit}</p>
+`;
+}else{
+responseBox.classList.add("error");
+responseBox.innerHTML=`
+<h4><i class="fas fa-circle-xmark"></i> Share Failed</h4>
+<p>${data.message || "Invalid input or API error."}</p>
+`;
+}
+
+}catch(e){
+responseBox.classList.add("error");
+responseBox.innerHTML=`
+<h4><i class="fas fa-triangle-exclamation"></i> Network Error</h4>
+<p>Unable to connect to server.</p>
+`;
+}
+}
+</script>
+
+</body>
+</html>
